@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+const FontWeight lightFontWeight = FontWeight.w500;
 const FontWeight mediumFontWeight = FontWeight.w600;
 const FontWeight boldFontWeight = FontWeight.bold;
 
