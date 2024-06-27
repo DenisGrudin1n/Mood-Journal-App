@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mood_journal/constants.dart';
 import 'package:mood_journal/views/splash_screen.dart';
 
@@ -11,12 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: bgLight,
       ),
-      home: const SplashScreenToHome(),
+      home: const SplashScreenToDailyMoodPage(),
     );
   }
 }

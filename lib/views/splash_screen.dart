@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mood_journal/constants.dart';
-import 'package:mood_journal/views/home_page.dart';
+import 'package:mood_journal/controllers/splash_screen_controller.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -33,22 +34,13 @@ class SplashScreen extends StatelessWidget {
   }
 }
 
-class SplashScreenToHome extends StatelessWidget {
-  const SplashScreenToHome({super.key});
+class SplashScreenToDailyMoodPage extends StatelessWidget {
+  const SplashScreenToDailyMoodPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    navigateToHome(context);
+    Get.put(SplashScreenController());
 
     return const SplashScreen();
-  }
-
-  void navigateToHome(BuildContext context) {
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-      );
-    });
   }
 }
