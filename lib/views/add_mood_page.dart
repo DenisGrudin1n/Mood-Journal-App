@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mood_journal/components/my_icons.dart';
 import 'package:mood_journal/constants.dart';
 import 'package:mood_journal/routes.dart';
 
@@ -22,10 +23,7 @@ class AddMoodPage extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () => Get.back(),
-                child: const Icon(
-                  Icons.arrow_back,
-                  color: blueColor,
-                ),
+                child: const MyIconArrowBack(),
               ),
               const SizedBox(
                 height: 30,
