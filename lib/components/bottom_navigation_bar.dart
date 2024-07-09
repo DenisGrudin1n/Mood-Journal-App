@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mood_journal/constants.dart';
 import 'package:mood_journal/controllers/bottom_navigation_controller.dart';
+import 'package:mood_journal/routes.dart';
 
 class MyBottomNavigationBar extends StatelessWidget {
   const MyBottomNavigationBar({super.key});
@@ -24,19 +25,19 @@ class MyBottomNavigationBar extends StatelessWidget {
         bottomNavigationController.changePage(index);
         switch (index) {
           case 0:
-            Get.offAllNamed('/home');
+            Get.offAllNamed(pages[1].name);
             break;
           case 1:
-            Get.offAllNamed('/statistics');
+            Get.offAllNamed(pages[2].name);
             break;
           case 2:
-            Get.offAllNamed('/add_mood');
+            Get.offAllNamed(pages[3].name);
             break;
           case 3:
-            Get.offAllNamed('/favorite');
+            Get.offAllNamed(pages[4].name);
             break;
           case 4:
-            Get.offAllNamed('/settings');
+            Get.offAllNamed(pages[5].name);
             break;
           default:
             break;
