@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:mood_journal/views/add_mood_page.dart';
+import 'package:mood_journal/views/daily_mood_page.dart';
 import 'package:mood_journal/views/favorite_page.dart';
 import 'package:mood_journal/views/home_page.dart';
 import 'package:mood_journal/views/settings_page.dart';
@@ -30,5 +31,9 @@ List<GetPage> pages = [
   GetPage(
     name: '/settings',
     page: () => const SettingsPage(),
+  ),
+  GetPage(
+    name: '/dailyMood',
+    page: () => const DailyMoodPage(),
   ),
 ];

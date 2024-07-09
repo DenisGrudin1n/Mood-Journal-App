@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:mood_journal/views/daily_mood_page.dart';
+import 'package:mood_journal/routes.dart';
 
 class SplashScreenController extends GetxController {
   @override
@@ -10,7 +10,7 @@ class SplashScreenController extends GetxController {
 
   void navigateToDailyMoodPage() {
     Future.delayed(const Duration(seconds: 3), () {
-      Get.off(() => const DailyMoodPage());
+      Get.offNamed(pages[pages.length - 1].name);
     });
   }
 }

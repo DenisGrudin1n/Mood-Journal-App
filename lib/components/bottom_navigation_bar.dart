@@ -25,19 +25,19 @@ class MyBottomNavigationBar extends StatelessWidget {
         bottomNavigationController.changePage(index);
         switch (index) {
           case 0:
-            Get.offAllNamed(pages[1].name);
+            Get.toNamed(pages[1].name);
             break;
           case 1:
-            Get.offAllNamed(pages[2].name);
+            Get.toNamed(pages[2].name);
             break;
           case 2:
-            Get.offAllNamed(pages[3].name);
+            Get.toNamed(pages[3].name);
             break;
           case 3:
-            Get.offAllNamed(pages[4].name);
+            Get.toNamed(pages[4].name);
             break;
           case 4:
-            Get.offAllNamed(pages[5].name);
+            Get.toNamed(pages[5].name);
             break;
           default:
             break;
