@@ -10,8 +10,9 @@ class DailyMoodPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DailyMoodPageController controller =
+    final DailyMoodPageController dailyMoodController =
         Get.put(DailyMoodPageController());
+    final HomePageController homeController = Get.put(HomePageController());
 
     return Scaffold(
       body: Container(
@@ -37,7 +38,7 @@ class DailyMoodPage extends StatelessWidget {
                 // Add Smiles Carousel
                 Expanded(
                   child: CarouselSlider.builder(
-                    carouselController: controller.emojiController,
+                    carouselController: dailyMoodController.emojiController,
                     itemCount: emojiList.length,
                     itemBuilder: (context, itemIndex, _) {
                       return Column(
@@ -49,7 +50,8 @@ class DailyMoodPage extends StatelessWidget {
                             width: 200,
                           ),
                           Obx(() {
-                            return controller.currentEmojiIndex.value ==
+                            return dailyMoodController
+                                        .currentEmojiIndex.value ==
                                     itemIndex
                                 ? SizedBox(
                                     height: 35,
@@ -83,7 +85,7 @@ class DailyMoodPage extends StatelessWidget {
                           const Duration(milliseconds: 1200),
                       autoPlayCurve: Curves.fastOutSlowIn,
                       onPageChanged: (itemIndex, _) {
-                        controller.currentEmojiIndex.value = itemIndex;
+                        dailyMoodController.currentEmojiIndex.value = itemIndex;
                       },
                     ),
                   ),
@@ -96,7 +98,14 @@ class DailyMoodPage extends StatelessWidget {
                   ),
                   child: InkWell(
                     // ignore: void_checks
-                    onTap: () => Get.put(HomePageController()),
+                    onTap: () {
+                      int selectedEmojiIndex =
+                          dailyMoodController.currentEmojiIndex.value;
+                      homeController.setSelectedEmojiIndex(selectedEmojiIndex);
+                      Future.delayed(Duration.zero, () {
+                        homeController.navigateToHome();
+                      });
+                    },
                     child: Container(
                       width: 330,
                       height: 50,

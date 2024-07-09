@@ -1,11 +1,28 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+
 import 'package:mood_journal/constants.dart';
+import 'package:mood_journal/controllers/home_page_controller.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  String getFormattedDateRange() {
+    final now = DateTime.now();
+    final startDate = now.subtract(const Duration(days: 9));
+    final endDate = now;
+
+    final DateFormat formatter = DateFormat('d MMM');
+
+    return '${formatter.format(startDate)} - ${formatter.format(endDate)}';
+  }
+
   @override
   Widget build(BuildContext context) {
+    final HomePageController homeController = Get.put(HomePageController());
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -33,19 +50,19 @@ class HomePage extends StatelessWidget {
                   const Spacer(),
                   Container(
                     height: 40,
-                    width: 110,
+                    width: 135,
                     decoration: BoxDecoration(
                       color: whiteColor,
                       borderRadius: BorderRadius.circular(18),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("9-15 Jun"),
-                        SizedBox(
+                        Text(getFormattedDateRange()),
+                        const SizedBox(
                           width: 7,
                         ),
-                        Icon(
+                        const Icon(
                           Icons.calendar_today_outlined,
                           color: blueColor,
                         ),
@@ -65,10 +82,17 @@ class HomePage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: 10,
                   itemBuilder: (context, index) {
-                    return const Column(
+                    final isToday = index == 9;
+                    return Column(
                       children: [
-                        BuildMoodCalendarCard(),
-                        SizedBox(
+                        BuildMoodCalendarCard(
+                          date: DateTime.now()
+                              .subtract(Duration(days: 9 - index)),
+                          selectedEmojiIndex:
+                              homeController.selectedEmojiIndex.value,
+                          isToday: isToday,
+                        ),
+                        const SizedBox(
                           width: 48.5,
                         ),
                       ],
@@ -255,10 +279,28 @@ class BuildJournalCard extends StatelessWidget {
 }
 
 class BuildMoodCalendarCard extends StatelessWidget {
-  const BuildMoodCalendarCard({super.key});
+  final DateTime date;
+  final int selectedEmojiIndex;
+  final bool isToday;
+
+  const BuildMoodCalendarCard({
+    super.key,
+    required this.date,
+    required this.selectedEmojiIndex,
+    required this.isToday,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final day = DateFormat('d').format(date);
+    final weekday = DateFormat('E').format(date);
+
+    String emojiAsset = isToday
+        ? (selectedEmojiIndex != -1
+            ? emojiList[selectedEmojiIndex]
+            : emojiList[8])
+        : '';
+
     return Container(
       height: 85,
       width: 40,
@@ -266,31 +308,37 @@ class BuildMoodCalendarCard extends StatelessWidget {
         color: whiteColor,
         borderRadius: BorderRadius.circular(18),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            "12",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: boldFontWeight,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          top: 8,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              day,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: boldFontWeight,
+              ),
             ),
-          ),
-          const Text(
-            "Thu",
-            style: TextStyle(
-              fontSize: 12,
+            Text(
+              weekday,
+              style: const TextStyle(
+                fontSize: 12,
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 3,
-          ),
-          Image.asset(
-            emojiList[8],
-            height: 22,
-            width: 22,
-          ),
-        ],
+            const SizedBox(
+              height: 3,
+            ),
+            if (isToday)
+              Image.asset(
+                emojiAsset,
+                height: 22,
+                width: 22,
+              ),
+          ],
+        ),
       ),
     );
   }
