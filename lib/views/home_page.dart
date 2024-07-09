@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:mood_journal/components/bottom_navigation_bar.dart';
 
 import 'package:mood_journal/constants.dart';
 import 'package:mood_journal/controllers/home_page_controller.dart';
@@ -126,43 +127,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: whiteColor,
-        selectedItemColor: blueColor,
-        unselectedItemColor: Colors.black.withOpacity(0.55),
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        iconSize: 28,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.house_outlined),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.insert_chart_outlined_outlined),
-            label: 'Statistics',
-          ),
-          BottomNavigationBarItem(
-            icon: CircleAvatar(
-              backgroundColor: blueColor,
-              radius: 22,
-              child: Icon(
-                Icons.add,
-                color: whiteColor,
-              ),
-            ),
-            label: 'Add mood',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_outline),
-            label: 'Favorite',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings_outlined),
-            label: 'Setings',
-          ),
-        ],
-      ),
+      bottomNavigationBar: const MyBottomNavigationBar(),
     );
   }
 }
